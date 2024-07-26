@@ -12,8 +12,10 @@ Halaman `register.php` memungkinkan pengguna baru untuk mendaftar ke sistem. Pen
 
 ![Register Page](images/register.png)
 
-### Tampilan Halaman Registrasi
+### Tampilan Halaman Login
 
-![Register Page](images/login.png)
+![Login Page](images/login.png)
 
+### Tampilan Halaman Index
 
+![Index Page](images/index.png)
