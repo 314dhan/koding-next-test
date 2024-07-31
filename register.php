@@ -1,26 +1,3 @@
-<?php
-include 'config.php';
-
-if (isset($_POST['register'])) {
-    $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $username, $password);
-
-    if ($stmt->execute()) {
-        echo "Registrasi berhasil!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    $stmt->close();
-}
-
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -38,10 +15,10 @@ $conn->close();
                         <h2>Register</h2>
                     </div>
                     <div class="card-body">
-                        <form action="register.php" method="post">
+                        <form action="controller/RegisterController.php" method="post">
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input type="text" class="form-control" id="username" name="username" required autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>

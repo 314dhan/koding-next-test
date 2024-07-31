@@ -1,31 +1,3 @@
-<?php
-include 'config.php';
-session_start();
-
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    $sql = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['username'] = $username;
-        header("Location: index.php");
-        exit();
-    } else {
-        echo "Username atau password salah.";
-    }
-
-    $stmt->close();
-}
-
-$conn->close();
-?>
 <!DOCTYPE html>
 <html>
 
@@ -43,10 +15,10 @@ $conn->close();
                         <h2>Login</h2>
                     </div>
                     <div class="card-body">
-                        <form action="login.php" method="post">
+                        <form action="controller/LoginController.php" method="post">
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input type="text" class="form-control" id="username" name="username" required autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
