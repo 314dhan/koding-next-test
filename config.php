@@ -1,14 +1,29 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "login_project";
+class Database
+{
+    private $conn;
 
-// Membuat koneksi / create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    public function __construct($servername, $username, $password, $dbname)
+    {
+        $this->conn = new mysqli($servername, $username, $password, $dbname);
 
-// Cek connection
-if ($conn->connect_error) {
-    echo "No Connection";
-    die("Connection failed: " . $conn->connect_error);
+        // Cek koneksi
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+    }
+
+    public function getConnection()
+    {
+        return $this->conn;
+    }
+
+    public function __destruct()
+    {
+        $this->conn->close();
+    }
 }
+
+// Usage example
+$db = new Database("localhost", "root", "", "login_project");
+$conn = $db->getConnection();

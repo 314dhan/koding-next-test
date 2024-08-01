@@ -1,7 +1,20 @@
 <?php
-session_start();
-session_unset();
-session_destroy();
+class SessionManager
+{
+    public function __construct()
+    {
+        session_start();
+    }
 
-header("Location: ../login.php");
-exit();
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        header("Location: ../login.php");
+        exit();
+    }
+}
+
+// Usage example
+$sessionManager = new SessionManager();
+$sessionManager->logout();
